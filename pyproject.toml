@@ -11,3 +11,8 @@ dependencies = [
     "sphinx>=8.2.3",
 ]
 
+[dependency-groups]
+dev = [
+    "ruff>=0.12.3",
+]
+
