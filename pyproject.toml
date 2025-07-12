@@ -1,0 +1,8 @@
+[project]
+name = "amiet-self-noise"
+version = "0.1.0"
+description = "Airfoil trailing edge noise computation code. GMC729 final project"
+author = ["Enrico Foglia", "Odyssée Cadoret"]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
