@@ -2,10 +2,12 @@
 name = "amiet-self-noise"
 version = "0.1.0"
 description = "Airfoil trailing edge noise computation code. GMC729 final project"
-author = ["Enrico Foglia", "Odyssée Cadoret"]
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "furo>=2024.8.6",
     "numpy>=2.3.1",
     "scipy>=1.16.0",
+    "sphinx>=8.2.3",
 ]
+
