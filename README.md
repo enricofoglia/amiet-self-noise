@@ -15,9 +15,6 @@ and the opening ``docs/build/html/index.html`` in any browser.
 1. We can implement a data processing module if the user has only time measurements at different microphones.
 2. We can implement a data visualization module.
 
-# Create the checklist as a Markdown (.md) file
-
-
 ## ✅ Git Branch & Pull Request Checklist
 
 ### 🏗️ Before Starting a Branch
