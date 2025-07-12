@@ -5,4 +5,7 @@ description = "Airfoil trailing edge noise computation code. GMC729 final projec
 author = ["Enrico Foglia", "Odyssée Cadoret"]
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "numpy>=2.3.1",
+    "scipy>=1.16.0",
+]
