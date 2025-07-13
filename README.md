@@ -64,3 +64,6 @@ and the opening ``docs/build/html/index.html`` in any browser.
 - Use `draft` PRs if work is still in progress
 - Use `squash & merge` to keep commit history clean
 - Tag releases with version numbers for important milestones
+
+### This is a modification for the purpose of demonstration
+ - Modification
