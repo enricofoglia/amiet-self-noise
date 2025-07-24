@@ -6,3 +6,5 @@ amiet-self-noise modules
    :caption: Contents:
 
    preproc
+   io
+   
