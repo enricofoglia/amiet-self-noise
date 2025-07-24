@@ -3,14 +3,12 @@ from typing import Tuple
 import numpy as np
 import scipy.signal as ss
 
+
 def spectrum(
-        data: np.array,
-        filter: bool = False,
-        average: bool = True,
-        **kwargs
+    data: np.array, filter: bool = False, average: bool = True, **kwargs
 ) -> Tuple[np.array, np.array]:
-    '''Compute the power spectral density of a signal.
-    
+    """Compute the power spectral density of a signal.
+
     Parameters
     ----------
     data: np.array
@@ -26,5 +24,5 @@ def spectrum(
         Frequency array
     spp: np.array
         Power spectral density array
-    '''
+    """
     pass
