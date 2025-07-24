@@ -1,12 +1,12 @@
 import os
 import h5py
-
+import yaml
 
 import numpy as np
 
-from rich import print as rprint
+from rich import print
 
-import amiet_self_noise.io as io
+import amiet_self_noise.io_utils as io
 
 
 def test_read_pressure_data():
@@ -17,15 +17,32 @@ def test_read_pressure_data():
     with h5py.File(path, "w") as f:
         f.create_dataset("pressure", data=pressure)
         f.create_dataset("time", data=time)
-    rprint(f"[bold green]Created test file {path}[/bold green]")
+    print(f"[bold green]Created test file {path}[/bold green]")
     pressure_out, time_out = io.read_pressure_data(path)
-    rprint(f"[bold green]Read pressure data from {path}[/bold green]")
+    print(f"[bold green]Read pressure data from {path}[/bold green]")
     assert pressure_out.ndim == 1
     assert time_out.ndim == 1  # removed empty dimension
-    rprint(f"[bold green]Test passed![/bold green]")
+    print(f"[bold green]Test passed![/bold green]")
     os.remove(path)
 
+def test_read_config():
+    config_data = {
+        "b": 1.0,
+        "T": 300.0,
+        "L": 10.0,
+        "obs": [0.0, 0.0, 0.0],
+        "U0": 340.29
+    }
+
+    path = "test_config.yaml"
+    yaml.dump(config_data, open(path, "w"))
+    
+    config = io.read_config(path)
+    os.remove(path)
+    print(config)
+    
 
 if __name__ == "__main__":
     test_read_pressure_data()
-    rprint("[bold green]All tests passed![/bold green]")
+    test_read_config()
+    print("[bold green]All tests passed![/bold green]")

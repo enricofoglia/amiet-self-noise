@@ -1,5 +1,6 @@
 import os
 import h5py
+import yaml
 from typing import Tuple
 
 from dataclasses import dataclass, field
@@ -73,3 +74,18 @@ def read_pressure_data(
     time = np.array(time)
 
     return pressure.squeeze(), time.squeeze()
+
+def read_config(
+        path: str
+):
+    """Read the configuration from a YAML file. Output is an 
+    :mod:`InputData <amiet_self_noise.io_utils.InputData>` object."""
+    with open(path, 'r') as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
+    
+    # Convert obs to numpy array if it's a list
+    if isinstance(config['obs'], list):
+        config['obs'] = np.array(config['obs'])
+
+    config = InputData(**config)
+    return config
