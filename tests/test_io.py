@@ -75,11 +75,7 @@ def test_input_data_dns():
     input_data = io.InputData("test_config_dns.yaml")
 
     input_data.print_summary()
-    print(f"[bold green]Read DNS data from {input_data.config.data_path}[/bold green]")
-    print(f"Acquisition frequency: {input_data.fs} Hz")
-    print(f"Number of probes: {len(input_data.pressure)}")
-    print(input_data.pressure.shape)
-
+    
 if __name__ == "__main__":
     # test_read_pressure_data()
     # test_read_config()
