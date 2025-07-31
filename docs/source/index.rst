@@ -12,5 +12,6 @@ Welcome to amiet-self-noise
    :maxdepth: 2
    :caption: Contents:
 
+   usage
    modules
 
