@@ -1,3 +1,5 @@
+.. _target to modules
+
 amiet-self-noise modules
 ========================
 

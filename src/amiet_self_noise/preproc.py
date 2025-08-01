@@ -56,7 +56,7 @@ def spectrum(
     if filter:
         # Correct the power spectral density for the filter response
         _, h = sg.freqz_sos(sos, worN=f, fs=fs)
-        gain = np.abs(h) ** 2 + 1e-12  # Power gain = |H(f)|^2
+        gain = np.maximum(np.abs(h) ** 2, 1e-12)  # Power gain = |H(f)|^2, ensure not to divide by zero
         spp /= gain
 
     return f, spp
