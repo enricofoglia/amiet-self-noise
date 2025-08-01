@@ -1,3 +1,5 @@
+.. _target to modules
+
 amiet-self-noise modules
 ========================
 
@@ -6,3 +8,5 @@ amiet-self-noise modules
    :caption: Contents:
 
    preproc
+   io
+   
