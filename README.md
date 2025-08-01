@@ -9,6 +9,13 @@ Go into the project folder in your pc and type:
 ```
 git pull origin main
 ```
+If prompted to write a commit message, modify the default text (if you want) and then type:
+```
+<Esc>
+:wq
+```
+to save and quit the editor (the editor is called ``vim``).
+
 If ever your pc doesn't know what origin is, just type:
 ```
 git remote add origin https://github.com/enricofoglia/amiet-self-noise.git
@@ -21,6 +28,26 @@ cd docs
 make html
 ```
 and the opening ``docs/build/html/index.html`` in any browser.
+
+## Contribute to the project
+```bash
+git add .
+git commit -m "Write a message here"
+# Right now you 'saved' the modification on your pc
+
+git push origin [branch-name]
+```
+
+## Bash 101
+Useful commands are:
+```bash
+# Move to the location 'path/to/something'
+cd path/to/something
+# See where you are
+pwd
+# See what's up where you are
+ls [path]
+```
 
 ## Possible features
 1. We can implement a data processing module if the user has only time measurements at different microphones.
