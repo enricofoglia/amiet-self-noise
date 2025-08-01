@@ -13,5 +13,6 @@ Welcome to amiet-self-noise
    :caption: Contents:
 
    usage
+   theory
    modules
 
