@@ -56,6 +56,7 @@ class ConfigData:
     def __post_init__(self):
         self.c0 = np.sqrt(1.4 * 287.05 * self.T)
         self.M0 = self.U0 / self.c0
+        self.n_obs = self.obs.shape[0]
 
 
 @dataclass
@@ -152,9 +153,7 @@ class InputData:
         with open(path, "r") as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
 
-        # Convert obs to numpy array if it's a list
-        if isinstance(config["obs"], list):
-            config["obs"] = np.array(config["obs"])
+        config["obs"] = np.array(config["obs"])
 
         self.config = ConfigData(**config)
 
