@@ -32,7 +32,6 @@ class AmietModel:
     def compute_wps(
             self
     ):
-        # Placeholder for actual WPS computation logic
         f, phi_pp = preproc.spectrum(
             self.input_data.pressure,
             fs = self.input_data.fs,
@@ -60,9 +59,6 @@ class AmietModel:
             f,
             observer
     ):
-        # Placeholder for actual radiation integral computation logic
-        # This should compute the radiation integral based on the frequency
-        # and observer position.
         beta2 = 1 - self.input_data.config.M**2
         S0 = np.sqrt(observer[0]**2 + beta2 * (observer[1]**2 + observer[2]**2))
         L = ri.compute_radiation_integral(
