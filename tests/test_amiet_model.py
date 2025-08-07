@@ -85,6 +85,7 @@ def test_radiation_integral():
         "T": 300.0,      # température en K
         "obs": [[x1, 0.0, 0.0]],  # position de l'observateur
         "U0": U,         # vitesse du vent en m/s
+        "rho": 1.225,
         "data_path": "/home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_p_raw_data_250.h5",
         "data_type": "dns",
         "mesh_path": "/home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_grid.h5",

@@ -1,0 +1,22 @@
+---
+# Files and paths
+data_type: dns
+data_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_p_raw_data_250.h5
+mesh_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_grid.h5
+out_dir: /home/daep/e.foglia/Documents/2A/01_cours/UdeS/02_aeroscoustics/project/out
+#
+# Physical parameters
+b: 0.0678   # The airfoil semichord, in meters (float)
+L: 1.0   # The span length of the airfoil, in meters (float)
+T: 10.2 # The temperature, in Kelvin (float)
+U0: 16.0 # The freestream velocity, in m/s (float)
+rho: 1.225 # The air density, in kg/m^3 (float)
+#
+# Observers location
+obs:
+- [0.0, 0.0, 5.0] # The cartesian coordinates of the observer,
+- [0.0, 0.0, 10.0] # w.r.t the trailing edge, in meters (list of lists)
+#
+# Probes indices
+xprobes: 0 # The index of the probe in the chord-wise direction.
+yprobes: null # The index of the probe in the span-wise direction.

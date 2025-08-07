@@ -25,6 +25,8 @@ class ConfigData:
         The temperature in Kelvin.
     L: float
         The span of the airfoil, in meters.
+    rho: float
+        The density of the fluid, in kg/m^3. 
     obs: np.array
         Observers location in cartesian coordinates, as a numpy array.
     U0: float
@@ -38,11 +40,13 @@ class ConfigData:
     b: float
     T: float
     L: float
+    rho: float
     obs: np.array
     U0: float
     data_type: str
     data_path: str | None = None
     mesh_path: str | None = None
+    out_dir: str | None = None
     xprobes: int | None = None
     yprobes: int | None = None
 
@@ -57,6 +61,8 @@ class ConfigData:
         self.c0 = np.sqrt(1.4 * 287.05 * self.T)
         self.M0 = self.U0 / self.c0
         self.n_obs = self.obs.shape[0]
+        self.time_scale = (2*self.b)/self.U0 # convective time scale in seconds
+        self.p_dyn = 0.5 * self.rho * self.U0**2
 
 
 @dataclass
@@ -114,6 +120,8 @@ class InputData:
 
         More information on the configuration file can be found in the :ref:`dedicated 
         page <target-to-input-files>` in the documentation.
+    normalize: bool, optional
+        If True, the data will be de-normalized using the configuration data.
     
     Attributes
     ----------
@@ -130,17 +138,19 @@ class InputData:
     def __init__(
         self,
         config_path: str,
+        normalize: bool = True,
     ):
         self._read_config(config_path)
-        self._read_data(self.config.data_type)
+        self._read_data(self.config.data_type, normalize=normalize)
 
 
-    def _read_data(self, data_type: str):
+    def _read_data(self, data_type: str, normalize: bool):
         match data_type:
             case "dns":
                 self.data = self._read_dns_data(
                     self.config.mesh_path,
                     self.config.data_path,
+                    normalize=normalize,
                     xprobes=self.config.xprobes,
                     yprobes=self.config.yprobes,
                 )
@@ -161,13 +171,20 @@ class InputData:
         self,
         mesh_path,
         data_path,
+        normalize: bool,
         xprobes: int | None = None,
         yprobes: int | None = None,
+
     ):
         x_idx = slice(None) if xprobes is None else xprobes
         y_idx = slice(None) if yprobes is None else yprobes
         self.pos = self._read_mesh_file_dns(mesh_path, x_idx, y_idx)
         self.pressure, self.fs = self._read_pressure_file_dns(data_path, x_idx, y_idx)
+        if normalize:
+            # de-normalize
+            self.pressure *= self.config.p_dyn
+            self.fs /= self.config.time_scale
+            self.pos *=  (2 * self.config.b)  
 
     def _read_mesh_file_dns(self, path: str, x_idx, y_idx) -> Tuple[np.array, np.array]:
         """Read the mesh file and return the x and y coordinates as numpy arrays."""
