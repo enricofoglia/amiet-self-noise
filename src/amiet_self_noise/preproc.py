@@ -103,7 +103,7 @@ def coherence_function(
         Coherence values for each sensor with respect to the reference sensor.
     """
 
-    reference = data[:, ref_index]  # Reference sensor (midspan)
+    reference = data[ref_index, :]  # Reference sensor (midspan)
     if filter:
         reference = _butter_bandpass_filter(
             reference, flims[0], flims[1], fs, order=order, form="sos"
@@ -111,8 +111,8 @@ def coherence_function(
 
     gamma = []
 
-    for i in range(data.shape[1]):
-        fi = data[:, i]  # Current sensor data
+    for i in range(data.shape[0]):
+        fi = data[i, :]  # Current sensor data
         if filter:
             fi = _butter_bandpass_filter(fi, flims[0], flims[1], fs, order=order)
         f, coh = sg.coherence(reference, fi, fs=fs, **kwargs)

@@ -1,0 +1,12 @@
+L: 10.0
+T: 300.0
+U0: 20.0
+b: 1.0
+data_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_p_raw_data_250.h5
+data_type: dns
+mesh_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_grid.h5
+obs:
+- [10.0, 0.0, 0.0]
+- [0.0, 0.0, 10.0]
+xprobes: 0
+yprobes: null
