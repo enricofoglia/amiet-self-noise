@@ -50,6 +50,9 @@ def compute_radiation_integral(omega_array, U, c0, x1, S0, M, a=None):
     I_array = []
 
     for omega in omega_array:
+        if omega == 0:
+            I_array.append(0.0)
+            continue
         k = omega / c0
         K = omega / U
         beta2 = 1 - M**2

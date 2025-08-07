@@ -185,7 +185,7 @@ class InputData:
             p_avg = f["pressure_mean"][x_idx, y_idx]
             fs = 1.0 / f["T_s"][()]  # adimensional time step
 
-        return p, fs
+        return p.T, fs
 
     def print_summary(self, console: Console = None) -> None:
         """Print a detailed summary of the InputData configuration and loaded data.
