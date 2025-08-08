@@ -11,6 +11,8 @@ from rich import print
 
 OUTPUT_DIR = "/home/daep/e.foglia/Documents/2A/01_cours/UdeS/02_aeroscoustics/project/out/"
 FIG_DIR = osp.join(OUTPUT_DIR, "figures")
+p_ref = 2e-5  # Reference pressure in Pa
+
 
 def test_stats():
     input_data = asn.io_utils.InputData("config_test_amiet_model.yaml")
@@ -21,16 +23,18 @@ def test_stats():
     f, phi_pp = model.compute_wps()
     f, ly = model.compute_coherence()
 
+    span = np.abs(input_data.pos[-1,2] - input_data.pos[0,2])
+
     fig, axs = plt.subplots(1,2, layout="tight")
-    axs[0].semilogx(f, 10 * np.log10(phi_pp / 2e-12))
+    axs[0].semilogx(f, 10 * np.log10(phi_pp / p_ref ** 2))
     axs[0].set_title("WPS")
     axs[0].set_xlabel("Frequency (Hz)")
     axs[0].set_ylabel(r"PSD (dB/Hz)")
     axs[0].grid()
-    axs[1].loglog(f, ly)
+    axs[1].semilogx(f, ly / span)
     axs[1].set_title("Coherence Length")
     axs[1].set_xlabel("Frequency (Hz)")
-    axs[1].set_ylabel(r"$l_y$ (m)")
+    axs[1].set_ylabel(r"$l_y/L$ (-)")
     axs[1].grid()
     
     plt.savefig(osp.join(FIG_DIR,"stats_test_plot.png"))
@@ -51,7 +55,6 @@ def test_amiet_model():
 
     # Compute the PSD
     f, psd = model.compute_psd()
-    print(psd.shape)
 
     # Assertions to check if the output is as expected
     assert f.shape[0] > 0, "Frequency array should not be empty."
@@ -59,13 +62,29 @@ def test_amiet_model():
 
     print("[bold green]AmietModel test passed![/bold green]")
 
+    input_data = asn.io_utils.InputData("config_test_amiet_model.yaml", normalize=True)
+    model = asn.amiet_model.AmietModel(input_data)
+    f_norm, psd_norm = model.compute_psd()
+
+    input_data = asn.io_utils.InputData("config_test_amiet_model.yaml", normalize=False)
+    model = asn.amiet_model.AmietModel(input_data)
+    f_adim, psd_adim = model.compute_psd()
+
     fig, ax = plt.subplots()
     for i in range(psd.shape[1]):
-        ax.semilogx(f, 10*np.log10(psd[:,i]/2e-12), label=f"Obs {i+1}")
+        ax.semilogx(f, 10*np.log10(psd[:,i]/p_ref ** 2), label=f"Obs {i+1}")
     ax.set_xlabel("Frequency (Hz)")
     ax.set_ylabel("PSD")
     ax.legend()
     plt.savefig(osp.join(FIG_DIR,"amiet_model_test_plot.png"))
+
+    fig, ax = plt.subplots()
+    ax.semilogx(f_norm, 10*np.log10(psd_norm[:,0]/p_ref ** 2), label="Dimensional")
+    ax.semilogx(f_adim, 10*np.log10(psd_adim[:,0]/p_ref ** 2), label="Adimensional")
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("PSD")
+    ax.legend()
+    plt.savefig(osp.join(FIG_DIR,"amiet_model_test_plot_norm.png"))
 
 def test_radiation_integral():
     omega_vals = np.linspace(100, 2000, 100)  # fréquences en rad/s
@@ -107,8 +126,8 @@ def test_radiation_integral():
     ax[0].set_ylabel(r"$I(\omega)$")
     ax[0].legend()
     ax[0].grid()
-    ax[1].plot(omega_vals, 10*np.log10(np.abs(I_values) ** 2 / 2e-12), label="|I|^2")
-    ax[1].plot(omega_vals, 10*np.log10(np.abs(I) ** 2 / 2e-12), label="|I|^2", 
+    ax[1].plot(omega_vals, 10*np.log10(np.abs(I_values) ** 2 / p_ref ** 2), label="|I|^2")
+    ax[1].plot(omega_vals, 10*np.log10(np.abs(I) ** 2 / p_ref ** 2), label="|I|^2", 
                linestyle="--", color="tab:blue")
     ax[1].set_xlabel(r"$\omega$ (rad/s)")
     ax[1].set_ylabel(r"$\vert I(\omega)\vert^2$")

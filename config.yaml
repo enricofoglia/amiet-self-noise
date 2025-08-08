@@ -14,9 +14,9 @@ rho: 1.225 # The air density, in kg/m^3 (float)
 #
 # Observers location
 obs:
-- [0.0, 0.0, 5.0] # The cartesian coordinates of the observer,
-- [0.0, 0.0, 10.0] # w.r.t the trailing edge, in meters (list of lists)
+- [0.0, 0.0, 1.21] # The cartesian coordinates of the observer,
+- [0.0, 0.0, 2.42] # w.r.t the trailing edge, in meters (list of lists)
 #
 # Probes indices
-xprobes: 0 # The index of the probe in the chord-wise direction.
+xprobes: 100 # The index of the probe in the chord-wise direction.
 yprobes: null # The index of the probe in the span-wise direction.

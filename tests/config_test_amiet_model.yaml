@@ -12,7 +12,7 @@ data_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_p_raw_da
 data_type: dns
 mesh_path: /home/daep/e.foglia/Documents/2A/13_gibbs/data/SherFWHsolid1_grid.h5
 obs:
-- [0.0, 0.0, 5.0]
-- [0.0, 0.0, 10.0]
-xprobes: 0
+- [0.0, 0.0, 1.21]
+- [0.0, 0.0, 2.42]
+xprobes: 100
 yprobes: null

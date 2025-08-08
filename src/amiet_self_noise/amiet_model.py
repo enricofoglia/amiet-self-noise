@@ -32,11 +32,18 @@ class AmietModel:
     def compute_wps(
             self
     ):
+        N = self.input_data.pressure.shape[1]
+        nperseg = N // 8
+        noverlap = nperseg // 2
+        window = 'hann'
         f, phi_pp = preproc.spectrum(
             self.input_data.pressure,
             fs = self.input_data.fs,
             filter = False,
-            avg = 0
+            avg = 0,
+            nperseg=nperseg,
+            noverlap=noverlap,
+            window=window,
         )
 
         return f, phi_pp
@@ -44,12 +51,21 @@ class AmietModel:
     def compute_coherence(
             self
     ):
+        N = self.input_data.pressure.shape[1]
+        nperseg = N // 8
+        noverlap = nperseg // 2
+        window = 'hann'
         f, ly = preproc.coherence_length(
             self.input_data.pressure,
             z = self.input_data.pos[:, 2],
             ref_index = self.input_data.pos.shape[0] // 2,
             fs = self.input_data.fs,
-            filter = False,
+            filter = True,
+            flims = (1600, 8000),
+            order=2,
+            nperseg=nperseg,
+            noverlap=noverlap,
+            window=window,
         )
         return f, ly
     
