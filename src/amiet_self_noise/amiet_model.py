@@ -62,11 +62,13 @@ class AmietModel:
         S0 = np.sqrt(observer[0]**2 + beta2 * (observer[1]**2 + observer[2]**2))
         I = ri.compute_radiation_integral(
             omega_array=f * 2 * np.pi,  # Convert frequency to angular frequency
-            U=self.input_data.config.U0,
+            U0=self.input_data.config.U0,
             c0=self.input_data.config.c0,
             x1=observer[0],
             S0=S0,
-            M=self.input_data.config.M0
+            M0=self.input_data.config.M0,
+            b=self.input_data.config.b,
+            alpha = 0.7 # TODO: make this a parameter in the config
 
         )
 

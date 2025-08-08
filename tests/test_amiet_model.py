@@ -75,13 +75,13 @@ def test_radiation_integral():
     x1 = 10.0          # position observateur
     M = U / c0        # nombre de Mach
     S0 = np.sqrt(x1**2 + (1 - M**2) * (0.0**2 + 0.0**2))  # S0 pour l'observateur
+    b=1.0
 
-
-    I_values = asn.radiation_integral.compute_radiation_integral(omega_vals, U, c0, x1, S0, M)
+    I_values = asn.radiation_integral.compute_radiation_integral(omega_vals, U, c0, x1, S0, M, b, alpha=0.7)
 
     config = {
         "L": 10.0, 
-        "b": 1.0,        # demi-envergure
+        "b": b,        # demi-envergure
         "T": 300.0,      # température en K
         "obs": [[x1, 0.0, 0.0]],  # position de l'observateur
         "U0": U,         # vitesse du vent en m/s
