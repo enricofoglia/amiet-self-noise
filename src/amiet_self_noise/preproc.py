@@ -114,7 +114,7 @@ def coherence_function(
     for i in range(data.shape[0]):
         fi = data[i, :]  # Current sensor data
         if filter:
-            fi = _butter_bandpass_filter(fi, flims[0], flims[1], fs, order=order)
+            fi = _butter_bandpass_filter(fi, flims[0], flims[1], fs, order=order)[0]
         f, coh = sg.coherence(reference, fi, fs=fs, **kwargs)
         gamma.append(coh)
 
