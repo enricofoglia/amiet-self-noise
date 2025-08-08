@@ -18,13 +18,12 @@ def main():
     p_ref = 2e-5  # Reference pressure in Pa
     fig, ax = plt.subplots()
     for i in range(psd.shape[1]):
-        ax.semilogx(f, 10 * np.log10(psd[:, i] / p_ref**2), label=f"Obs {i+1}")
+        ax.semilogx(f, 10 * np.log10(psd[:, i] / p_ref**2), label=f"Obs {i + 1}")
     ax.set_xlabel(r"$f$ [Hz]")
     ax.set_ylabel(r"$10\log(S_{pp}/p^2_{\mathrm{ref}})$ [dB]")
     ax.grid()
     ax.legend()
     plt.savefig(osp.join(input_data.config.out_dir, "figures", "psd_plot.png"))
-
 
 
 if __name__ == "__main__":

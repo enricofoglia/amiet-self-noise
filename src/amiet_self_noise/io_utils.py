@@ -26,7 +26,7 @@ class ConfigData:
     L: float
         The span of the airfoil, in meters.
     rho: float
-        The density of the fluid, in kg/m^3. 
+        The density of the fluid, in kg/m^3.
     obs: np.array
         Observers location in cartesian coordinates, as a numpy array.
     U0: float
@@ -61,7 +61,7 @@ class ConfigData:
         self.c0 = np.sqrt(1.4 * 287.05 * self.T)
         self.M0 = self.U0 / self.c0
         self.n_obs = self.obs.shape[0]
-        self.time_scale = (2*self.b)/self.U0 # convective time scale in seconds
+        self.time_scale = (2 * self.b) / self.U0  # convective time scale in seconds
         self.p_dyn = 0.5 * self.rho * self.U0**2
 
 
@@ -88,13 +88,13 @@ class InputData:
     """Class to hold input data for the Amiet self-noise model.
     This is the main entry point for the ``amiet_self_noise`` package. This class reads
     the configuration from a YAML file and loads the data based on the specified type.
-    
+
     .. note::
-        The user should only really need to modify the configuration file to run all the 
+        The user should only really need to modify the configuration file to run all the
         desired analyses. If this is not the case, please contact the developers.
-    
+
     .. warning::
-        This class currently only supports DNS data. Other data types may be added in 
+        This class currently only supports DNS data. Other data types may be added in
         the future.
 
     Parameters
@@ -118,11 +118,11 @@ class InputData:
             xprobes: 0
             yprobes: null # use all probes in y direction
 
-        More information on the configuration file can be found in the :ref:`dedicated 
+        More information on the configuration file can be found in the :ref:`dedicated
         page <target-to-input-files>` in the documentation.
     normalize: bool, optional
         If True, the data will be de-normalized using the configuration data.
-    
+
     Attributes
     ----------
     config: ConfigData
@@ -135,6 +135,7 @@ class InputData:
         The sampling frequency in Hz, derived from the data file.
 
     """
+
     def __init__(
         self,
         config_path: str,
@@ -142,7 +143,6 @@ class InputData:
     ):
         self._read_config(config_path)
         self._read_data(self.config.data_type, normalize=normalize)
-
 
     def _read_data(self, data_type: str, normalize: bool):
         match data_type:
@@ -174,7 +174,6 @@ class InputData:
         normalize: bool,
         xprobes: int | None = None,
         yprobes: int | None = None,
-
     ):
         x_idx = slice(None) if xprobes is None else xprobes
         y_idx = slice(None) if yprobes is None else yprobes
@@ -184,7 +183,7 @@ class InputData:
             # de-normalize
             self.pressure *= self.config.p_dyn
             self.fs /= self.config.time_scale
-            self.pos *=  (2 * self.config.b)  
+            self.pos *= 2 * self.config.b
 
     def _read_mesh_file_dns(self, path: str, x_idx, y_idx) -> Tuple[np.array, np.array]:
         """Read the mesh file and return the x and y coordinates as numpy arrays."""

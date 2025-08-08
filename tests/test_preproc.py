@@ -7,8 +7,11 @@ import amiet_self_noise.preproc as preproc
 
 from rich import print
 
-OUTPUT_DIR = "/home/daep/e.foglia/Documents/2A/01_cours/UdeS/02_aeroscoustics/project/out/"
+OUTPUT_DIR = (
+    "/home/daep/e.foglia/Documents/2A/01_cours/UdeS/02_aeroscoustics/project/out/"
+)
 FIG_DIR = osp.join(OUTPUT_DIR, "figures")
+
 
 def test_wps():
     print("[bold blue]Testing WPS computation...[/bold blue]")
