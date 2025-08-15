@@ -30,7 +30,6 @@ and the opening ``docs/build/html/index.html`` in any browser.
 
 ## Contribute to the project 🚧:
 To contribute to the project, you need to follow these five steps:
-
 ✳️: Synchronize your fork (your github version of this repo) with my, original repo (to be done in github).
 
 ✳️: Copy the content of your repo to your computer, by running:

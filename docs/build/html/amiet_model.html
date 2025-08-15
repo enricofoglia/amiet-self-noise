@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="amiet-self-noise modules" href="modules.html" /><link rel="prev" title="Usage" href="usage.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="preproc module" href="preproc.html" /><link rel="prev" title="amiet-self-noise modules" href="modules.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>Theoretical reference - amiet_self_noise 0.1.0 documentation</title>
+        <title>amiet_model module - amiet_self_noise 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -201,9 +201,9 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Theoretical reference</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">amiet-self-noise modules</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of amiet-self-noise modules</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="amiet_model.html">amiet_model module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theoretical reference</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">amiet-self-noise modules</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of amiet-self-noise modules</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
 </ul>
@@ -228,7 +228,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/theory.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/amiet_model.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -242,21 +242,183 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="theoretical-reference">
-<h1>Theoretical reference<a class="headerlink" href="#theoretical-reference" title="Link to this heading">¶</a></h1>
-<p>This page provides a brief overview of the theoretical background of the Amiet model for trailing-edge noise. While it is not strictly necessary to know the theory to use tha package, having a clear understading of the underlying physics and assumptions can help in evaluating the results and choosing the appropriate parameters for the model, as well as understading some parts of the documentation. For an in depth description of the model, we advise to refer to the original paper by Amiet (1975) and the subsequent extension by Roger &amp; Moreau (2005).</p>
-<p>On a fundamental level, noise is generated at the trailing edge of an airfoil because the pressure fluctuations induced by the turbulent boundary layer get  scattered by the trailing edge. In the original paper, the airfoil is considered as a semi-infinite flat plate, and a correction to take into account the presence of the leading-edge was later introduced by Roger &amp; Moreau (2005). While it is understood that the ultime sound source is the turbulent boundary layer, the Amiet model uses the pressure fluctuations at the trailing edge as a proxy for the sound source. The presence of the trailing edge is then modeled as a linear filter that modifies the pressure fluctuations to produce the sound radiation.</p>
-<p>In the simplified form used for the present package, the Amiet model’s prediction of the sound power spectral density at a point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and frequency <span class="math notranslate nohighlight">\(\omega\)</span> is given by:</p>
-<div class="math-wrapper docutils container" id="equation-amiet-model">
-<div class="math notranslate nohighlight" id="equation-amiet-model">
-<span class="eqno">(1)<a class="headerlink" href="#equation-amiet-model" title="Link to this equation">¶</a></span>\[S_{pp}^{te}(\mathbf{x},\omega) = \left(\frac{\omega x_3 c}{2\pi c_0 S_0^2}\right)^2 \frac2L\Phi_{pp}(\omega)\ell_y\left(\frac{kx_2}{S_0},\omega\right)\left\vert\mathcal L\left(\frac{\omega}{U_c},\frac{kx_2}{S_0}\right)\right\vert^2\]</div>
+          <section id="module-amiet_self_noise.amiet_model">
+<span id="amiet-model-module"></span><h1>amiet_model module<a class="headerlink" href="#module-amiet_self_noise.amiet_model" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amiet_self_noise.amiet_model.</span></span><span class="sig-name descname"><span class="pre">AmietModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Amiet model for aeroacoustic noise prediction from airfoils.</p>
+<p>The Amiet model is used to predict the noise generated by turbulent
+boundary layers on airfoil surfaces. This class implements the complete
+Amiet model including wall pressure spectrum computation, coherence
+length calculation, and radiation integral evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_data</strong> (<em>object</em>) – Input data object containing pressure measurements, positions,
+sampling frequency, and configuration parameters.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel.input_data">
+<span class="sig-name descname"><span class="pre">input_data</span></span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel.input_data" title="Link to this definition">¶</a></dt>
+<dd><p>Stored input data object containing all necessary parameters
+and measurements for the Amiet model computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Amiet model is based on the theoretical framework developed by
+Amiet (1975) for predicting airfoil trailing edge noise from
+turbulent boundary layer pressure fluctuations.</p>
 </div>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Amiet, R. K. (1975). Acoustic radiation from an airfoil in a
+turbulent stream. Journal of Sound and Vibration, 41(4), 407-420.</p>
+</aside>
+</aside>
+<dl class="py method">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel.compute_coherence">
+<span class="sig-name descname"><span class="pre">compute_coherence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel.compute_coherence" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the spanwise coherence length from pressure measurements.</p>
+<p>This method calculates the spanwise coherence length which
+characterizes the correlation of pressure fluctuations across
+the airfoil span.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>f</strong> (<em>ndarray</em>) – Frequency array in Hz, shape (n_freq,).</p></li>
+<li><p><strong>ly</strong> (<em>ndarray</em>) – Spanwise coherence length in meters, shape (n_freq,).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The coherence length is computed using:</p>
+<ul class="simple">
+<li><p>Bandpass filtering between 1600-8000 Hz (2nd order)</p></li>
+<li><p>Reference position at the middle of the measurement array</p></li>
+<li><p>Same windowing parameters as wall pressure spectrum</p></li>
+<li><p>Hanning window with 50% overlap</p></li>
+</ul>
+</div>
+<p>The coherence length represents the spanwise extent over which
+pressure fluctuations remain correlated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel.compute_psd">
+<span class="sig-name descname"><span class="pre">compute_psd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel.compute_psd" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the power spectral density of radiated noise.</p>
+<p>This method calculates the complete power spectral density by
+combining the wall pressure spectrum, coherence length, and
+radiation integral with appropriate directivity corrections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>f</strong> (<em>ndarray</em>) – Frequency array in Hz, shape (n_freq,).</p></li>
+<li><p><strong>psd</strong> (<em>ndarray</em>) – Power spectral density in Pa²/Hz, shape (n_freq, n_obs).
+Each column corresponds to an observer position.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PSD computation follows the Amiet model formulation:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[PSD = D \cdot 2L \cdot \Phi_{pp} \cdot l_y \cdot |I|^2\]</div>
+</div>
+<p>where D is the directivity factor, L is the airfoil length,
+Φ_pp is the wall pressure spectrum, l_y is the coherence length,
+and I is the radiation integral.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel.compute_radiation_integral">
+<span class="sig-name descname"><span class="pre">compute_radiation_integral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel.compute_radiation_integral" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the Amiet radiation integral for a given observer.</p>
+<p>The radiation integral accounts for the acoustic scattering
+from the airfoil trailing edge and is a key component of
+the Amiet model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>ndarray</em>) – Frequency array in Hz, shape (n_freq,).</p></li>
+<li><p><strong>observer</strong> (<em>array_like</em>) – Observer position [x, y, z] in meters, shape (3,).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>I</strong> – Complex radiation integral values, shape (n_freq,).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, complex</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The radiation integral is computed using:</p>
+<ul class="simple">
+<li><p>Observer distance S0 corrected for Mach number effects</p></li>
+<li><p>Angular frequency ω = 2πf</p></li>
+<li><p>Fixed alpha parameter = 0.7 (empirical constant)</p></li>
+</ul>
+</div>
+<p>The integral represents the acoustic transfer function from
+surface pressure fluctuations to far-field sound pressure.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The current version only supports constant convection velocity, fixed to
+0.7 of the freestream velocity.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amiet_self_noise.amiet_model.AmietModel.compute_wps">
+<span class="sig-name descname"><span class="pre">compute_wps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.amiet_model.AmietModel.compute_wps" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the wall pressure spectrum from pressure measurements.</p>
+<p>This method calculates the wall pressure spectrum using Welch’s
+method with Hanning window and 50% overlap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>f</strong> (<em>ndarray</em>) – Frequency array in Hz, shape (n_freq,).</p></li>
+<li><p><strong>phi_pp</strong> (<em>ndarray</em>) – Wall pressure spectrum in Pa²·s, shape (n_freq,).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The spectrum is computed using:</p>
+<ul class="simple">
+<li><p>Segment length: N/8 samples (where N is total number of samples)</p></li>
+<li><p>Overlap: 50% of segment length</p></li>
+<li><p>Window: Hanning window</p></li>
+<li><p>No additional filtering is applied (filter=False)</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -264,23 +426,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="modules.html">
+          <a class="next-page" href="preproc.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">amiet-self-noise modules</div>
+                <div class="title">preproc module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="usage.html">
+          <a class="prev-page" href="modules.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Usage</div>
+                <div class="title">amiet-self-noise modules</div>
                 
               </div>
             </a>
@@ -302,8 +464,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">amiet_model module</a><ul>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel"><code class="docutils literal notranslate"><span class="pre">AmietModel</span></code></a><ul>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel.input_data"><code class="docutils literal notranslate"><span class="pre">AmietModel.input_data</span></code></a></li>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel.compute_coherence"><code class="docutils literal notranslate"><span class="pre">AmietModel.compute_coherence()</span></code></a></li>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel.compute_psd"><code class="docutils literal notranslate"><span class="pre">AmietModel.compute_psd()</span></code></a></li>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel.compute_radiation_integral"><code class="docutils literal notranslate"><span class="pre">AmietModel.compute_radiation_integral()</span></code></a></li>
+<li><a class="reference internal" href="#amiet_self_noise.amiet_model.AmietModel.compute_wps"><code class="docutils literal notranslate"><span class="pre">AmietModel.compute_wps()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

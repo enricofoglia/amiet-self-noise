@@ -7,6 +7,7 @@ amiet-self-noise modules
    :maxdepth: 2
    :caption: Contents:
 
+   amiet_model
    preproc
    io
    
