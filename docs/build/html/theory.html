@@ -206,6 +206,7 @@
 <li class="toctree-l2"><a class="reference internal" href="amiet_model.html">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radiation_integral.html">radiation_integral module</a></li>
 </ul>
 </li>
 </ul>
@@ -250,13 +251,38 @@
         <article role="main" id="furo-main-content">
           <section id="theoretical-reference">
 <h1>Theoretical reference<a class="headerlink" href="#theoretical-reference" title="Link to this heading">¶</a></h1>
-<p>This page provides a brief overview of the theoretical background of the Amiet model for trailing-edge noise. While it is not strictly necessary to know the theory to use tha package, having a clear understading of the underlying physics and assumptions can help in evaluating the results and choosing the appropriate parameters for the model, as well as understading some parts of the documentation. For an in depth description of the model, we advise to refer to the original paper by Amiet (1975) and the subsequent extension by Roger &amp; Moreau (2005).</p>
+<p>This page provides a brief overview of the theoretical background of the Amiet model for trailing-edge noise. While it is not strictly necessary to know the theory to use tha package, having a clear understading of the underlying physics and assumptions can help in evaluating the results and choosing the appropriate parameters for the model, as well as understading some parts of the documentation. For an in depth description of the model, we advise to refer to the original paper by Amiet (1975) <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and the subsequent extension by Roger &amp; Moreau (2005) <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <p>On a fundamental level, noise is generated at the trailing edge of an airfoil because the pressure fluctuations induced by the turbulent boundary layer get  scattered by the trailing edge. In the original paper, the airfoil is considered as a semi-infinite flat plate, and a correction to take into account the presence of the leading-edge was later introduced by Roger &amp; Moreau (2005). While it is understood that the ultime sound source is the turbulent boundary layer, the Amiet model uses the pressure fluctuations at the trailing edge as a proxy for the sound source. The presence of the trailing edge is then modeled as a linear filter that modifies the pressure fluctuations to produce the sound radiation.</p>
 <p>In the simplified form used for the present package, the Amiet model’s prediction of the sound power spectral density at a point in space <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and frequency <span class="math notranslate nohighlight">\(\omega\)</span> is given by:</p>
 <div class="math-wrapper docutils container" id="equation-amiet-model">
 <div class="math notranslate nohighlight" id="equation-amiet-model">
-<span class="eqno">(1)<a class="headerlink" href="#equation-amiet-model" title="Link to this equation">¶</a></span>\[S_{pp}^{te}(\mathbf{x},\omega) = \left(\frac{\omega x_3 c}{2\pi c_0 S_0^2}\right)^2 \frac2L\Phi_{pp}(\omega)\ell_y\left(\frac{kx_2}{S_0},\omega\right)\left\vert\mathcal L\left(\frac{\omega}{U_c},\frac{kx_2}{S_0}\right)\right\vert^2\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-amiet-model" title="Link to this equation">¶</a></span>\[S_{pp}^{te}(\mathbf{x},\omega) = \left(\frac{\omega x_3 c}{2\pi c_0 S_0^2}\right)^2 L\Phi_{pp}(\omega)\ell_y\left(\omega\right)\left\vert\mathcal L\left(\frac{\omega}{U_c}\right)\right\vert^2\]</div>
 </div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c = 2b\)</span> is the airfoil chord (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_0\)</span> is the speed of sound (m/s)</p></li>
+<li><p><span class="math notranslate nohighlight">\(S_0\)</span> is the corrected observer’s distance (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(L\)</span> is the span of the airfoil (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi_{pp}\)</span> is the wall pressure fluctuations autospectrum (<span class="math notranslate nohighlight">\(\mathrm{Pa}^2/\mathrm{Hz}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ell_y\)</span> is the span-wise coherence length (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(U_c\)</span> is the turbulent eddies’ convection speed (m/s)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is the radiation integral.</p></li>
+</ul>
+<p>References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Amiet, R. K. (1975). Acoustic radiation from an airfoil in a
+turbulent stream. Journal of Sound and Vibration, 41(4), 407-420.</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Roger, M., &amp; Moreau, S. (2005). Back-scattering correction and
+further extensions of Amiet’s trailing-edge noise model.
+Part 1: theory. Journal of Sound and Vibration, 286(3), 477-506.</p>
+</aside>
+</aside>
 </section>
 
         </article>
