@@ -16,10 +16,36 @@ Welcome to amiet-self-noise
    theory
    modules
 
+Quickstart: running the example code 
+------------------------------------
+
+If you wish to use ``amiet_self_noise`` as a standalone to quickly analyze some existing data, you can do so by running the script ``main.py`` which is included with the rest of the code. Here's how to do it:
+
+1. Download the code from github. If you have git installed on your machine, you can simply clone the repository as:
+
+.. code-block:: bash
+
+   git clone https://github.com/enricofoglia/amiet-self-noise.git
+
+Otherwise, at the same link, it is possible to download a zipped version of the package. Unzip it where you need your code to be run.
+
+2. Once the package has been copied on your machine, open a terminal and navigate to the ``amiet_self_noise`` directory, where the ``main.py`` file is located.
+
+3. Modify the ``config.yaml`` file in your preferred text editor.
+
+4. Make sure you have all the required packages installed (check the ``pyproject.toml`` file, under "dependencies").
+
+5. Run:
+
+.. code-block:: bash
+
+   python main.py
+
+
 Usage example
 -------------
 
-Using ``amiet_self_noise`` in your projects is as easy as writing four lines of code:
+Using ``amiet_self_noise`` in your own python projects is as easy as writing four lines of code:
 
 .. code-block:: python
    

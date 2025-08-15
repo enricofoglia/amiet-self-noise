@@ -15,6 +15,8 @@ def main():
     # Compute the PSD
     f, psd = model.compute_psd()
 
+    f, phi_pp = model.compute_wps()
+
     p_ref = 2e-5  # Reference pressure in Pa
     fig, ax = plt.subplots()
     for i in range(psd.shape[1]):
@@ -24,6 +26,14 @@ def main():
     ax.grid()
     ax.legend()
     plt.savefig(osp.join(input_data.config.out_dir, "figures", "psd_plot.png"))
+
+    fig, ax = plt.subplots()
+    ax.semilogx(f, 10 * np.log(phi_pp / p_ref ** 2))
+    ax.set_xlabel(r"$f$ [Hz]")
+    ax.set_ylabel(r"$\Phi_{pp}$")
+    ax.grid()
+    ax.legend()
+    plt.savefig(osp.join(input_data.config.out_dir, "figures", "phi_pp.png"))
 
 
 if __name__ == "__main__":
