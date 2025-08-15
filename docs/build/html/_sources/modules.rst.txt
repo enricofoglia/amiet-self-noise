@@ -10,4 +10,5 @@ amiet-self-noise modules
    amiet_model
    preproc
    io
+   radiation_integral
    

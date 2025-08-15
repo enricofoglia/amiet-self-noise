@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -206,6 +206,7 @@
 <li class="toctree-l2"><a class="reference internal" href="amiet_model.html">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radiation_integral.html">radiation_integral module</a></li>
 </ul>
 </li>
 </ul>
@@ -242,7 +243,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -267,10 +268,26 @@
 <li class="toctree-l2"><a class="reference internal" href="amiet_model.html">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radiation_integral.html">radiation_integral module</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<section id="usage-example">
+<h2>Usage example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<p>Using <code class="docutils literal notranslate"><span class="pre">amiet_self_noise</span></code> in your projects is as easy as writing four lines of code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. import the module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">amiet_self_noise</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">asn</span>
+<span class="c1"># 2. read the data from the configuration file</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="n">asn</span><span class="o">.</span><span class="n">io_utils</span><span class="o">.</span><span class="n">InputData</span><span class="p">(</span><span class="s2">&quot;config.yaml&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 3. initialize the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">asn</span><span class="o">.</span><span class="n">amiet_model</span><span class="o">.</span><span class="n">AmietModel</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+<span class="c1"># 4. compute the PSD</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">psd</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">compute_psd</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Read more about the configuration files in the <a class="reference internal" href="usage.html#target-to-input-files"><span class="std std-ref">dedicated page</span></a>.</p>
+</section>
 </section>
 
         </article>
@@ -306,8 +323,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to amiet-self-noise</a><ul>
+<li><a class="reference internal" href="#usage-example">Usage example</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -206,6 +206,7 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radiation_integral.html">radiation_integral module</a></li>
 </ul>
 </li>
 </ul>
@@ -343,11 +344,11 @@ Each column corresponds to an observer position.</p></li>
 <p>The PSD computation follows the Amiet model formulation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[PSD = D \cdot 2L \cdot \Phi_{pp} \cdot l_y \cdot |I|^2\]</div>
+\[S_{pp} = D \cdot 2L \cdot \Phi_{pp} \cdot \ell_y \cdot |I|^2\]</div>
 </div>
-<p>where D is the directivity factor, L is the airfoil length,
-Φ_pp is the wall pressure spectrum, l_y is the coherence length,
-and I is the radiation integral.</p>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is the directivity factor, <span class="math notranslate nohighlight">\(L\)</span> is the airfoil length,
+<span class="math notranslate nohighlight">\(\Phi_{pp}\)</span> is the wall pressure spectrum, <span class="math notranslate nohighlight">\(\ell_y\)</span> is the coherence length,
+and <span class="math notranslate nohighlight">\(I\)</span> is the radiation integral.</p>
 </div>
 </dd></dl>
 
@@ -377,7 +378,6 @@ the Amiet model.</p>
 <p>The radiation integral is computed using:</p>
 <ul class="simple">
 <li><p>Observer distance S0 corrected for Mach number effects</p></li>
-<li><p>Angular frequency ω = 2πf</p></li>
 <li><p>Fixed alpha parameter = 0.7 (empirical constant)</p></li>
 </ul>
 </div>

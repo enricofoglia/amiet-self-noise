@@ -16,3 +16,20 @@ Welcome to amiet-self-noise
    theory
    modules
 
+Usage example
+-------------
+
+Using ``amiet_self_noise`` in your projects is as easy as writing four lines of code:
+
+.. code-block:: python
+   
+   # 1. import the module
+   import amiet_self_noise as asn
+   # 2. read the data from the configuration file
+   input_data = asn.io_utils.InputData("config.yaml", normalize=True)
+   # 3. initialize the model
+   model = asn.amiet_model.AmietModel(input_data)
+   # 4. compute the PSD
+   f, psd = model.compute_psd()
+
+Read more about the configuration files in the :ref:`dedicated page <target-to-input-files>`.

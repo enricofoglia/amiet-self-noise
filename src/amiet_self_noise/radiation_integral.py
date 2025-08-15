@@ -2,7 +2,7 @@ import numpy as np
 from scipy.special import fresnel
 
 
-def E_etoile(x):
+def _E_etoile(x):
     # Implementation compatible avec la convention utilisée E^*(x). Pour x <= 0 on remplace par une valeur positive.
     x = np.asarray(x, dtype=np.float64)  # évite racine de négatif / zéro
     xpos = np.maximum(x, 1e-12)
@@ -15,10 +15,10 @@ def E_etoile(x):
 ## On calcule la valeur de G
 
 
-def compute_G(D, mu, epsilon):
-    E_etoile_4mu = E_etoile(4.0 * mu)
+def _compute_G(D, mu, epsilon):
+    E_etoile_4mu = _E_etoile(4.0 * mu)
     E_4mu = np.conj(E_etoile_4mu)
-    E_etoile_2D = E_etoile(2.0 * D)
+    E_etoile_2D = _E_etoile(2.0 * D)
 
     Dm2mu = D - 2.0 * mu
     Dp2mu = D + 2.0 * mu
@@ -49,7 +49,7 @@ def compute_G(D, mu, epsilon):
 
 
 ##  Expressions analytiques L1, L2 (trailing edge)
-def compute_L1_L2(omega, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None):
+def _compute_L1_L2(omega, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None):
     # On calcule L1 et L2 pour une fréquence angulaire omega
     if a_param is None:
         a_param = alpha
@@ -73,8 +73,8 @@ def compute_L1_L2(omega, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None):
         C = np.sign(C) * 1e-12 + 1e-12
 
     # E* evaluations
-    E_etoile_2B = E_etoile(2.0 * B)
-    E_etoile_2Bminus2C = E_etoile(2.0 * (B - C))
+    E_etoile_2B = _E_etoile(2.0 * B)
+    E_etoile_2Bminus2C = _E_etoile(2.0 * (B - C))
 
     prefacteur = -np.exp(2j * C) / (1j * C)
     term1 = (1.0 + 1j) * np.exp(-2j * C) * np.sqrt(B / (B - C)) * E_etoile_2Bminus2C
@@ -91,9 +91,9 @@ def compute_L1_L2(omega, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None):
     H = (1.0 + 1j) * np.exp(-1j * 4.0 * mu) * (1.0 - Theta**2)
     H = H / (np.sqrt(np.pi * B) * (alpha - 1.0) * k1_bar + 1e-30)
     # Evaluer E*(4µ)
-    E_etoile_4mu = E_etoile(4.0 * mu)
+    E_etoile_4mu = _E_etoile(4.0 * mu)
     # G = 1.0 # !!!
-    G = compute_G(D, mu, eps)
+    G = _compute_G(D, mu, eps)
     # Construction L2
     term_L2_a = np.exp(1j * 4.0 * mu) * (1.0 - (1.0 + 1j) * E_etoile_4mu)
     term_L2_b = -np.exp(2j * D)
@@ -108,13 +108,102 @@ def compute_L1_L2(omega, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None):
 def compute_radiation_integral(
     omega_array, U0, c0, x1, S0, M0, b, alpha=1.0, a_param=None
 ):
+    """
+    Compute the Amiet radiation integral for airfoil trailing edge noise.
+    
+    This function calculates the complex-valued radiation integral that 
+    represents the acoustic transfer function from surface pressure 
+    fluctuations to far-field sound pressure in the Amiet model. The 
+    integral accounts for the acoustic scattering effects at the airfoil
+    trailing edge.
+    
+    Parameters
+    ----------
+    omega_array : array_like
+        Angular frequency array in rad/s, shape (n_freq,).
+    U0 : float
+        Free-stream velocity in m/s.
+    c0 : float
+        Speed of sound in m/s.
+    x1 : float
+        Observer x-coordinate (streamwise direction) in m.
+    S0 : float
+        Observer distance from trailing edge in m.
+    M0 : float
+        Free-stream Mach number, dimensionless.
+    b : float
+        Airfoil semi-chord (half chord length) in m.
+    alpha : float, optional
+        Convection velocity ratio Uc/U0, where Uc is the convection
+        velocity of turbulent eddies. Default is 1.0.
+    a_param : float, optional
+        Alternative parameter for convection velocity ratio. If provided,
+        overrides the alpha parameter. Default is None.
+        
+    Returns
+    -------
+    I : ndarray, complex
+        Complex radiation integral values, shape (n_freq,).
+        The magnitude squared :math:`\\vert I\\vert^2` represents the acoustic efficiency
+        of the trailing edge scattering process.
+        
+    
+    .. note::
+
+        The radiation integral is computed as :math:`I = L_1 + L_2`, where:
+        
+        - :math:`L_1` represents the leading edge contribution to the scattering
+        - :math:`L_2` represents the trailing edge contribution to the scattering
+        
+        The computation involves:
+        
+        1. Calculation of dimensionless parameters:
+
+        - :math:`\\mu = kb/\\beta^2` (reduced frequency)
+        - :math:`\\beta^2 = 1 - M_0^2` (compressibility factor)
+        - :math:`k = \\omega/c_0` (acoustic wavenumber)
+        
+        2. Evaluation of Fresnel integrals through the :math:`E^\\star` function
+                
+        The implementation handles numerical singularities by applying
+        small regularization values (1e-12) when parameters approach zero.
+        
+
+    .. warning::
+
+        For :math:`\\omega = 0`, the function returns 0 as a placeholder. The correct
+        asymptotic behavior at low frequencies is not yet implemented.
+    
+        
+    Examples
+    --------
+
+    
+    .. code-block:: python
+
+        omega = np.array([100, 1000, 10000])  # Angular frequencies
+        I = compute_radiation_integral(omega, U0=50, c0=343, x1=1.0, 
+                                    S0=10.0, M0=0.15, b=0.1)
+        efficiency = np.abs(I)**2  # Acoustic efficiency
+    
+    
+    References
+    ----------
+    .. [1] Amiet, R. K. (1975). Acoustic radiation from an airfoil in a 
+           turbulent stream. Journal of Sound and Vibration, 41(4), 407-420.
+    .. [2] Roger, M., & Moreau, S. (2005). Back-scattering correction and 
+           further extensions of Amiet's trailing-edge noise model. 
+           Part 1: theory. Journal of Sound and Vibration, 286(3), 477-506.
+    
+    """
+    
     omegas = np.asarray(omega_array, dtype=float)
     I_list = []
     for omega in omegas:
         if omega == 0:
             I_list.append(0.0)  # TODO: implement correct asymptotic behavior
             continue
-        L1, L2 = compute_L1_L2(
+        L1, L2 = _compute_L1_L2(
             omega, U0, c0, x1, S0, M0, b, alpha=alpha, a_param=a_param
         )
         I = L1 + L2

@@ -1,13 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head>
-<meta charset="utf-8"/>
+  <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="io_utils module" href="io.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-<meta name="robots" content="noindex" />
-<title>Search - amiet_self_noise 0.1.0 documentation</title><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+        <title>radiation_integral module - amiet_self_noise 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -192,21 +192,21 @@
   
   <span class="sidebar-brand-text">amiet_self_noise 0.1.0 documentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theoretical reference</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">amiet-self-noise modules</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of amiet-self-noise modules</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">amiet-self-noise modules</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of amiet-self-noise modules</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="amiet_model.html">amiet_model module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preproc.html">preproc module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">io_utils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="radiation_integral.html">radiation_integral module</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">radiation_integral module</a></li>
 </ul>
 </li>
 </ul>
@@ -228,7 +228,13 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/radiation_integral.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
@@ -237,23 +243,99 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="module-amiet_self_noise.radiation_integral">
+<span id="radiation-integral-module"></span><h1>radiation_integral module<a class="headerlink" href="#module-amiet_self_noise.radiation_integral" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="amiet_self_noise.radiation_integral.compute_radiation_integral">
+<span class="sig-prename descclassname"><span class="pre">amiet_self_noise.radiation_integral.</span></span><span class="sig-name descname"><span class="pre">compute_radiation_integral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amiet_self_noise.radiation_integral.compute_radiation_integral" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the Amiet radiation integral for airfoil trailing edge noise.</p>
+<p>This function calculates the complex-valued radiation integral that
+represents the acoustic transfer function from surface pressure
+fluctuations to far-field sound pressure in the Amiet model. The
+integral accounts for the acoustic scattering effects at the airfoil
+trailing edge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega_array</strong> (<em>array_like</em>) – Angular frequency array in rad/s, shape (n_freq,).</p></li>
+<li><p><strong>U0</strong> (<em>float</em>) – Free-stream velocity in m/s.</p></li>
+<li><p><strong>c0</strong> (<em>float</em>) – Speed of sound in m/s.</p></li>
+<li><p><strong>x1</strong> (<em>float</em>) – Observer x-coordinate (streamwise direction) in m.</p></li>
+<li><p><strong>S0</strong> (<em>float</em>) – Observer distance from trailing edge in m.</p></li>
+<li><p><strong>M0</strong> (<em>float</em>) – Free-stream Mach number, dimensionless.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Airfoil semi-chord (half chord length) in m.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Convection velocity ratio Uc/U0, where Uc is the convection
+velocity of turbulent eddies. Default is 1.0.</p></li>
+<li><p><strong>a_param</strong> (<em>float</em><em>, </em><em>optional</em>) – Alternative parameter for convection velocity ratio. If provided,
+overrides the alpha parameter. Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>I</strong> – Complex radiation integral values, shape (n_freq,).
+The magnitude squared <span class="math notranslate nohighlight">\(\vert I\vert^2\)</span> represents the acoustic efficiency
+of the trailing edge scattering process.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, complex</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The radiation integral is computed as <span class="math notranslate nohighlight">\(I = L_1 + L_2\)</span>, where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_1\)</span> represents the leading edge contribution to the scattering</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_2\)</span> represents the trailing edge contribution to the scattering</p></li>
+</ul>
+<p>The computation involves:</p>
+<ol class="arabic simple">
+<li><p>Calculation of dimensionless parameters:</p></li>
+</ol>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu = kb/\beta^2\)</span> (reduced frequency)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta^2 = 1 - M_0^2\)</span> (compressibility factor)</p></li>
+<li><p><span class="math notranslate nohighlight">\(k = \omega/c_0\)</span> (acoustic wavenumber)</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Evaluation of Fresnel integrals through the <span class="math notranslate nohighlight">\(E^\star\)</span> function</p></li>
+</ol>
+<p>The implementation handles numerical singularities by applying
+small regularization values (1e-12) when parameters approach zero.</p>
 </div>
-</noscript>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For <span class="math notranslate nohighlight">\(\omega = 0\)</span>, the function returns 0 as a placeholder. The correct
+asymptotic behavior at low frequencies is not yet implemented.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">])</span>  <span class="c1"># Angular frequencies</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">compute_radiation_integral</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">U0</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="mi">343</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                            <span class="n">S0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">M0</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">efficiency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Acoustic efficiency</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Amiet, R. K. (1975). Acoustic radiation from an airfoil in a
+turbulent stream. Journal of Sound and Vibration, 41(4), 407-420.</p>
+</aside>
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Roger, M., &amp; Moreau, S. (2005). Back-scattering correction and
+further extensions of Amiet’s trailing-edge noise model.
+Part 1: theory. Journal of Sound and Vibration, 286(3), 477-506.</p>
+</aside>
+</aside>
+</dd></dl>
 
-<div id="search-results"></div>
+</section>
 
         </article>
       </div>
@@ -261,7 +343,17 @@
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="io.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">io_utils module</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -280,8 +372,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">radiation_integral module</a><ul>
+<li><a class="reference internal" href="#amiet_self_noise.radiation_integral.compute_radiation_integral"><code class="docutils literal notranslate"><span class="pre">compute_radiation_integral()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -290,8 +401,6 @@
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
 </html>

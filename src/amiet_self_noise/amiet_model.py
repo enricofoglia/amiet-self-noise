@@ -66,11 +66,11 @@ class AmietModel:
             The PSD computation follows the Amiet model formulation:
             
             .. math::
-                PSD = D \\cdot 2L \\cdot \\Phi_{pp} \\cdot l_y \\cdot |I|^2
+                S_{pp} = D \\cdot 2L \\cdot \\Phi_{pp} \\cdot \\ell_y \\cdot |I|^2
                 
-            where D is the directivity factor, L is the airfoil length,
-            Φ_pp is the wall pressure spectrum, l_y is the coherence length,
-            and I is the radiation integral.
+            where :math:`D` is the directivity factor, :math:`L` is the airfoil length,
+            :math:`\Phi_{pp}` is the wall pressure spectrum, :math:`\ell_y` is the coherence length,
+            and :math:`I` is the radiation integral.
 
         """
         f, phi_pp = self.compute_wps()
@@ -206,7 +206,6 @@ class AmietModel:
             The radiation integral is computed using:
 
             - Observer distance S0 corrected for Mach number effects
-            - Angular frequency ω = 2πf
             - Fixed alpha parameter = 0.7 (empirical constant)
             
         The integral represents the acoustic transfer function from
